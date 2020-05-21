@@ -5,32 +5,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scroll Animation</title>
+    <!-- css files -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/mdb.min.css" />
+    <!-- javascript files -->
     <script src="js/scrollAnimate.js"></script>
+    <script src="js/buttons.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/mdb.min.js"></script>
     <style>
-      /* body {
-            margin: 0rem 0rem 0rem 76rem;
-        } */
-      .container {
-        /* margin-left: 1800px; */
-        width: 4400px;
+      .box {
+        width: 4050px;
       }
-      /* #animation-container {
-        width: 100vw;
-      } */
       .sticky {
         position: sticky;
         max-width: 100vw;
         height: auto;
-        left: 0.25rem;
+        left: 0rem;
+        padding-left: 20rem;
+      }
+      .player-div {
+        width: 1280px;
       }
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="box">
       <div class="sticky">
         <div id="animation-container"></div>
+        <div class="d-flex justify-content-center player-div">
+          <img class="mx-2" src="assets/Play.png" alt="play button" />
+          <img class="mx-2" src="assets/Pause.png" alt="pause button" />
+        </div>
       </div>
     </div>
+    <!-- javascript -->
     <script>
       var $aContainer = document.getElementById('animation-container');
       var aContainerRect = $aContainer.getBoundingClientRect();
@@ -39,7 +49,7 @@
       scrollAnimate({
         frames: {
           path: 'assets/Main/',
-          prefix: '_Main_',
+          prefix: 'Main_',
           extension: 'png',
           amount: 60,
           pad: '00000',

@@ -68,7 +68,7 @@
   };
 
   var _animationFrame = function () {
-    var frame = _map(window.scrollX, scroll.start, scroll.length, 0, assets.length - 2);
+    var frame = _map(window.scrollX, scroll.start, scroll.length, 0, assets.length - 1);
     if (frame !== latestFrame) {
       latestFrame = frame;
       context.drawImage(assets[latestFrame], 0, 0);
