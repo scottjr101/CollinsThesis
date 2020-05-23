@@ -6,14 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Scroll Animation</title>
     <!-- css files -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/mdb.min.css" />
-    <!-- javascript files -->
-    <script src="js/scrollAnimate.js"></script>
-    <script src="js/buttons.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/mdb.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/css/mdb.min.css"
+      rel="stylesheet"
+    />
     <!-- custom css -->
     <style>
       .box {
@@ -36,31 +38,49 @@
       <div class="sticky">
         <div id="animation-container"></div>
         <div class="d-flex justify-content-center player-div">
-          <img class="mx-2" id="startBtn" src="assets/Play.png" alt="play button" />
-          <img class="mx-2" id="stopBtn" src="assets/Pause.png" alt="pause button" />
+          <img
+            class="mx-2"
+            id="startBtn"
+            src="assets/Play.png"
+            alt="play button"
+          />
+          <img
+            class="mx-2"
+            id="stopBtn"
+            src="assets/Pause.png"
+            alt="pause button"
+          />
+          <img
+            class="mx-2"
+            id="resetBtn"
+            src="assets/Reset.png"
+            alt="reset button"
+          />
         </div>
       </div>
     </div>
+    <!-- <script>
+      function ResetX() {
+        window.scrollTo(0, 0);
+      }
+    </script> -->
     <!-- javascript -->
-    <script>
-      var $aContainer = document.getElementById('animation-container');
-      var aContainerRect = $aContainer.getBoundingClientRect();
-      var start = aContainerRect.top;
-      var length = aContainerRect.width + 500;
-      scrollAnimate({
-        frames: {
-          path: 'assets/Main/',
-          prefix: 'Main_',
-          extension: 'png',
-          amount: 60,
-          pad: '00000',
-        },
-        parent: $aContainer,
-        scroll: {
-          start: start,
-          length: length,
-        },
-      });
-    </script>
+    <script src="js/scrollAnimate.js"></script>
+    <script src="js/buttons.js"></script>
+    <!-- JQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.18.0/js/mdb.min.js"
+    ></script>
   </body>
 </html>

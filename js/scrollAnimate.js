@@ -91,51 +91,57 @@
 
   // NEW CODE
 
-  var startBtn = document.getElementById('startBtn');
-  // var stopBtn = document.getElementById('stopBtn');
-
   // Animate.
-  // function animate() {
-  //   requestID = window.requestAnimationFrame(animate);
-  //   var frame2 = _map(
-  //     window.scrollX,
-  //     scroll.start,
-  //     scroll.length,
-  //     0,
-  //     assets.length - 1
-  //   );
-
-  //   // If the box has not reached the end draw on the canvas.
-  //   // Otherwise stop the animation.
-  //   if (frame2 !== latestFrame) {
-  //     setInterval(function () {
-        
-        
-  //     }, 100);
-  //   } else {
-  //     window.cancelAnimationFrame(requestID);
-  //   }
-  // }
-
-  // Event listener for the start button.
-  if (startBtn) {
-    startBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      // Start the animation.
-      setInterval(function () {
-        window.requestAnimationFrame(_animationFrame);
-      }, 100);
-    });
+  function animate() {
+    window.scrollBy(36, 0);
+    scrolldelay = setTimeout(function () {
+      animate();
+    }, 33);
   }
 
-  // Event listener for the stop button.
-  // stopBtn.addEventListener('click', function (e) {
-  //   e.preventDefault();
+  var startBtn = document.getElementById('startBtn');
+  var stopBtn = document.getElementById('stopBtn');
+  var resetBtn = document.getElementById('resetBtn');
 
-  //   // Stop the animation;
-  //   window.cancelAnimationFrame(requestID);
-  // });
+  // Event listener for the start button.
+  startBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    // alert('hey');
+    // Start the animation.
+    animate();
+  });
+
+  // Event listener for the stop button.
+  stopBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // Stop the animation;
+    clearTimeout(scrolldelay);
+  });
+
+  // Event listener for the reset button.
+  resetBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    clearTimeout(scrolldelay);
+    // Reset the X position to 0.
+    window.scrollTo(0, 0);
+  });
+
+  function ResetX() {
+    window.scrollTo(0, 0);
+  }
+
+  // window.onload = clearTimeout(scrolldelay);
+  // window.scrollTo(0, 0);
+
+  // document.addEventListener(
+  //   'DOMContentLoaded',
+  //   function () {
+  //     clearTimeout(scrolldelay);
+  //     window.scrollTo(0, 0);
+  //   },
+  //   false
+  // );
 
   // NEW CODE END
 
@@ -187,3 +193,23 @@
     window['scrollAnimate'] = init;
   }
 })(window);
+
+// To connect the canvas to the ID to display on the page
+var $aContainer = document.getElementById('animation-container');
+var aContainerRect = $aContainer.getBoundingClientRect();
+var start = aContainerRect.top;
+var length = aContainerRect.width + 500;
+scrollAnimate({
+  frames: {
+    path: 'assets/Main/',
+    prefix: 'Main_',
+    extension: 'png',
+    amount: 60,
+    pad: '00000',
+  },
+  parent: $aContainer,
+  scroll: {
+    start: start,
+    length: length,
+  },
+});
