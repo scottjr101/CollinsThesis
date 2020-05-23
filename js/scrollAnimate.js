@@ -33,7 +33,7 @@
     };
     var images = [];
     for (i = 0; i < routes.length; i++) {
-      img = (images[i] = new Image());
+      img = images[i] = new Image();
       img.src = routes[i];
       img.onload = onload;
     }
@@ -54,7 +54,9 @@
       padString = pad.substr(0, 1);
     }
     for (assetNumber = 0; assetNumber < count; assetNumber++) {
-      routes.push(path + prefix + _pad(padString, assetNumber, pad.length) + extension);
+      routes.push(
+        path + prefix + _pad(padString, assetNumber, pad.length) + extension
+      );
     }
     return routes;
   };
@@ -68,7 +70,13 @@
   };
 
   var _animationFrame = function () {
-    var frame = _map(window.scrollX, scroll.start, scroll.length, 0, assets.length - 1);
+    var frame = _map(
+      window.scrollX,
+      scroll.start,
+      scroll.length,
+      0,
+      assets.length - 1
+    );
     if (frame !== latestFrame) {
       latestFrame = frame;
       context.drawImage(assets[latestFrame], 0, 0);
@@ -80,6 +88,56 @@
     context = _createCanvas(assets[0].width, assets[0].height);
     window.requestAnimationFrame(_animationFrame);
   };
+
+  // NEW CODE
+
+  var startBtn = document.getElementById('startBtn');
+  // var stopBtn = document.getElementById('stopBtn');
+
+  // Animate.
+  // function animate() {
+  //   requestID = window.requestAnimationFrame(animate);
+  //   var frame2 = _map(
+  //     window.scrollX,
+  //     scroll.start,
+  //     scroll.length,
+  //     0,
+  //     assets.length - 1
+  //   );
+
+  //   // If the box has not reached the end draw on the canvas.
+  //   // Otherwise stop the animation.
+  //   if (frame2 !== latestFrame) {
+  //     setInterval(function () {
+        
+        
+  //     }, 100);
+  //   } else {
+  //     window.cancelAnimationFrame(requestID);
+  //   }
+  // }
+
+  // Event listener for the start button.
+  if (startBtn) {
+    startBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // Start the animation.
+      setInterval(function () {
+        window.requestAnimationFrame(_animationFrame);
+      }, 100);
+    });
+  }
+
+  // Event listener for the stop button.
+  // stopBtn.addEventListener('click', function (e) {
+  //   e.preventDefault();
+
+  //   // Stop the animation;
+  //   window.cancelAnimationFrame(requestID);
+  // });
+
+  // NEW CODE END
 
   var init = function (params) {
     if (typeof params === 'undefined') {
@@ -105,17 +163,27 @@
     if (Array.isArray(params.frames)) {
       assets = _downloadAssets(params.frames, _animationStart);
     } else if (typeof params.frames === 'object') {
-      assets = _downloadAssets(_generateAssetsUrl(params.frames.path, params.frames.prefix,
-        params.frames.extension, params.frames.amount,
-        params.frames.pad ? params.frames.pad : false), _animationStart);
+      assets = _downloadAssets(
+        _generateAssetsUrl(
+          params.frames.path,
+          params.frames.prefix,
+          params.frames.extension,
+          params.frames.amount,
+          params.frames.pad ? params.frames.pad : false
+        ),
+        _animationStart
+      );
     } else {
-      _log('Invalid frames argument!', 'frames must be of type array or object.');
+      _log(
+        'Invalid frames argument!',
+        'frames must be of type array or object.'
+      );
     }
   };
 
   // eslint-disable-next-line dot-notation
   if (typeof window['scrollAnimate'] === 'undefined') {
-  // eslint-disable-next-line dot-notation
+    // eslint-disable-next-line dot-notation
     window['scrollAnimate'] = init;
   }
-}(window));
+})(window);
